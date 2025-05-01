@@ -96,8 +96,6 @@ class Gorventas():
 
         gvdatabase.get_ing_det(self, self.cont_p2)
 
-        #Label(p2, background='bisque1').pack()
-
         #Registro de Eventos
         reg_eventos = Label(p2, text="Registrar", background='bisque1')
         reg_eventos.grid(row=0, column=1, padx=70)
@@ -106,11 +104,6 @@ class Gorventas():
         '''Estoy tratando de incluir un calendario en esta parte, de no funcionar solo lo quito '''
         fec_hoy = date.today()
         
-        
-        #cua_fecha = Label(p2, text='Fecha: ', background='bisque3')
-        #cua_fecha.grid(row=1, column=1, sticky=NW)
-        #self.fecha = Entry(p2)
-        #self.fecha.grid(row=1, column=1, sticky=NW, padx=55)
 
         cua_ingreso = Label(p2, text='Ingreso: ', background='bisque3')
         cua_ingreso.grid(row=1, column=1, sticky=NW, pady= 25)
@@ -140,10 +133,6 @@ class Gorventas():
         # Mensaje registro de eventos
         self.message = Label(p2, text= ' ', background='bisque1')
         self.message.grid(row=1, column=1, sticky=N, pady=135)
-
-
-        #p3, contenido:
-        #p4, contenido:
 
 
         #Agregar pestañas

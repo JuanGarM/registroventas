@@ -47,7 +47,7 @@ def get_ing_det(self, pagina): # Tabla de Ingresos y egresos detallados
     for element in record:
         pagina.delete(element)
 
-    query = "SELECT * FROM Negocio ORDER BY id DESC"
+    query = "SELECT * FROM Negocio ORDER BY Fecha DESC"
     db_rows = self.run_query(query)
     for row in db_rows:
         pagina.insert('', 'end', values=row[:])
@@ -58,7 +58,7 @@ def validacion(self):
 
 
 def cua_limpiar(self):
-    self.fecha.delete(0, END)
+    self.fecha
     self.detalles.delete(0, END)
     self.ingreso.delete(0, END)
     self.egreso.delete(0, END)
@@ -82,7 +82,7 @@ def delete_evento(self, pagina):
     try:
         selected_item = pagina.selection()[0]  # obteniemos el primer item seleccionado
         item_values = pagina.item(selected_item)['values'] # accedemos al valor
-        
+
         respuesta = MessageBox.askokcancel('Verifica eliminación', '¿Seguro que desea eliminar el registro?') # Titulo y mensaje
         if respuesta == True:
             record_id = item_values[0]  # Obtenemos la ID por la tupla
@@ -90,7 +90,7 @@ def delete_evento(self, pagina):
 
             self.run_query(query, (record_id,)) # Pasamos la ID como una tupla
             self.message['text'] = 'Evento eliminado del registro'
-
+            self.cua_limpiar()
             get_ing_det(self, pagina)
         else:
             self.message['text'] = 'Registro no eliminado'
@@ -113,7 +113,6 @@ def actualizar_evento(self, pagina):
             respuesta = MessageBox.askokcancel('Verifica actualización', '¿Seguro que desea actualizar el registro?') # Titulo y mensaje
             if respuesta == True:
                 old_id = old_item[0]
-                old_item_values = old_item[1:]
                 parametros = [self.fecha.get(), self.detalles.get(), self.ingreso.get(), self.egreso.get()]
                 new_values = ['0' if x=='' else x for x in parametros]
                 query = f'UPDATE Negocio SET Fecha=?, Detalles=?, Ingreso=?, Egreso=? WHERE id={old_id}'
